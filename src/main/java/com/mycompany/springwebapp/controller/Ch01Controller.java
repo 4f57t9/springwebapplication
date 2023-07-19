@@ -17,13 +17,13 @@ public class Ch01Controller {
 	
 	@RequestMapping("/button1")
 	public String button1() {
-		log.info("실행");
+		log.info("실행1");
 		return "ch01/content";
 	}
 	
 	@RequestMapping("/button2")
 	public String button2() {
-		log.info("실행");
+		log.info("실행1");
 		return "redirect:/ch01/content";
 	}
 }
