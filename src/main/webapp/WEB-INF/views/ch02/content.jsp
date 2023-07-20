@@ -190,7 +190,7 @@
 	       </div>
 	       <div class="card-body">            
 	          <a href="${pageContext.request.contextPath}/ch02/filterAndInterceptor" class="btn btn-info btn-sm">Filter & Interceptor</a>
-	       </div>      
+	       </div>
 	    </div>
 	</div>
 </div>

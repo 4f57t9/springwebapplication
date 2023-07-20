@@ -9,12 +9,12 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.springwebapp.dto.Ch02Dto;
 import com.mycompany.springwebapp.dto.Ch02FileInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,12 +44,11 @@ public class Ch02Controller {
 	}
 	
 	
-	//@RequestMapping(value="/method", method=RequestMethod.PUT)
-	@PutMapping("/method")
-	public void putMethod(@RequestBody String json, HttpServletResponse response) throws IOException {
-		JSONObject jsonObject = new JSONObject(json);
-		log.info("bkind : " + jsonObject.getString("bkind"));
-		log.info("bno : " + jsonObject.getString("bno"));
+	@RequestMapping(value="/method", method=RequestMethod.PUT)
+	//@PutMapping("/method")
+	public void putMethod(@RequestBody Ch02Dto dto, HttpServletResponse response) throws IOException {
+		log.info("bkind : " + dto.getBkind());
+		log.info("bno : " +dto.getBno());
 		
 		JSONObject root = new JSONObject();
 		root.put("result", "success");
@@ -111,5 +110,10 @@ public class Ch02Controller {
 		return fileinfo;
 	}
 	
+	@RequestMapping("/filterAndInterceptor")
+	public String adminMethod() {
+		log.info("실행");
+		return "ch02/content";
+	}
 	
 }
