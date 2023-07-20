@@ -1,8 +1,14 @@
 package com.mycompany.springwebapp.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
@@ -13,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.springwebapp.dto.Ch02Dto;
 import com.mycompany.springwebapp.dto.Ch02FileInfo;
+import com.mycompany.springwebapp.interceptor.Auth;
+import com.mycompany.springwebapp.interceptor.Auth.Role;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,9 +34,17 @@ import lombok.extern.slf4j.Slf4j;
 public class Ch02Controller {
 	
 	@RequestMapping("/content")
-	public String content() {
+	public String content(HttpServletRequest request) {
 		return "ch02/content";
 	}
+	
+	/*@RequestMapping("/content")
+	public ModelAndView content() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("ch02/content");
+		mav.addObject("data", "홍길동");
+		return mav;
+	}*/
 	
 	//@GetMapping("/method")
 	@RequestMapping(value="/method", method=RequestMethod.GET)
@@ -110,10 +127,45 @@ public class Ch02Controller {
 		return fileinfo;
 	}
 	
+	@GetMapping("/fileDownload")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String fileName = "photo1.jpg";
+		String filePath = "/resources/" + fileName;
+		filePath = request.getServletContext().getRealPath(filePath);
+		log.info("filePath: " + filePath);
+		
+		// 응답 헤드에 Content-Type 추가
+		String mimeType = request.getServletContext().getMimeType(filePath);
+		response.setContentType(mimeType); // image/jpeg, image/png
+		
+		// 한글 이름의 파일명을 ISO-8859-1 문자셋으로 인코딩
+		String userAgent = request.getHeader("User-Agent");
+		if(userAgent.contains("Trident") || userAgent.contains("MSIE")) {
+			// IE
+			fileName = URLEncoder.encode(fileName, "UTF-8");
+			log.info("IE: " + fileName);
+		} else {
+			// Chrome, Edge, FireFox, Safari
+			fileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+			log.info("Chrome: " + fileName);
+		}
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		
+		// 응답 본문에 파일 데이터 싣기
+		OutputStream os = response.getOutputStream();
+		Path path = Paths.get(filePath);
+		Files.copy(path, os);
+		os.flush();
+		os.close();
+	}
+	
+	// url 경로로 들어온 메소드 실행
+	// 어드민인 유저만 실행
 	@RequestMapping("/filterAndInterceptor")
+	@Auth(Role.ADMIN)
 	public String adminMethod() {
-		log.info("실행");
-		return "ch02/content";
+		log.info("run");
+		return "ch02/adminPage";
 	}
 	
 }
