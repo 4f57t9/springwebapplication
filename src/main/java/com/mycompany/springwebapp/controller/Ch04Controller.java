@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.springwebapp.dto.Ch04Form1;
-import com.mycompany.springwebapp.validator.Ch04Form1Validator;
+import com.mycompany.springwebapp.dto.Ch04Form1Validator;
 
 import lombok.extern.slf4j.Slf4j;
 

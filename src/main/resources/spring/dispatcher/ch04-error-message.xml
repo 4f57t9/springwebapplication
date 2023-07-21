@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+      <property name="basenames" value="message.ch04_error">
+      </property>
+      <!-- message.ch04_error 에 지정된 파일 (message밑의)을 해석하고, 
+      코드에서 errors.form1.param1.required 같은 (validator.java에서 가져옴) 
+      키워드를 통해 같은 내용을 messag로부터 가져와서 content에 뿌려줌  -->
+   </bean>
+      
+</beans>

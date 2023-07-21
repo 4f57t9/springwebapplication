@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="card m-2">
@@ -184,7 +186,7 @@
                const param5 = $("#param5").val();
                
                let checkData = true;
-               
+               /* 
                const param1Error = $("#form2 .param1-error");
                param1Error.html("");
                if(param1 === "") {
@@ -198,18 +200,18 @@
                      checkData = false;
                   }
                }
-               
+                */
                if(checkData) {
                   $.ajax({
-                     url:"method1",
+                     url:"method2",
                      method:"post",
                      data: {
-                        param1:param1,
-                        param2, 
-                        param3, 
-                        param4, 
-                        param5
-                     },
+                         param1:param1,
+                         param2, 
+                         param3, 
+                         param4, 
+                         param5
+                      },
                      success: function(data){
                         
                      }
