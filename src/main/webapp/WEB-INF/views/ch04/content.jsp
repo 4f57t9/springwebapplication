@@ -14,7 +14,7 @@
             POST 방식으로 요청
          </div>
          <div class="card-body">
-            <form id="form1" method="post" action="method1" onsubmit="checkData()">
+            <form id="form1" method="post" action="method1">
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
                   <input type="text" name="param1" class="form-control" value="">
