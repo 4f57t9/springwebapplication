@@ -36,22 +36,22 @@ public class Ch04Form1Validator implements Validator{
         //param1 검사
         String param1 = ch04Form1.getParam1();
         if(param1 == null || param1.equals("")) {
-       errors.rejectValue("param1", "errors.form1.required", "필수 입력(D)");
+        	errors.rejectValue("param1", "errors.form1.required", "필수 입력");
         } else if(param1.length() < 8) {                                 //8 이 properties에 integer 값으로 들어간다.
-           errors.rejectValue("param1", "errors.form1.minlength",new Object[] {8}, "최소 8자 입력(D)"); 
+           errors.rejectValue("param1", "errors.form1.minlength",new Object[] {8}, "최소 8자 입력"); 
         } else if(param1.length() > 15) {
-           errors.rejectValue("param1", "errors.form1.maxlength",new Object[] {15},"최대 15자 입력(D)");
+           errors.rejectValue("param1", "errors.form1.maxlength",new Object[] {15},"최대 15자 입력");
         }
         
         //param2 검사
         String param2 = ch04Form1.getParam2();
         if(param2 == null || param2.equals("")) {
-       errors.rejectValue("param2", "errors.form1.required", "필수 입력(D)");
+       errors.rejectValue("param2", "errors.form1.required", "필수 입력");
         } else {
-           String regExp = "(010|011)-[0-9]{3,4}-[0-9]{4}";
-       boolean result = Pattern.matches(regExp, param2);
+           String regExp = "^(010|011)-[0-9]{3,4}-[0-9]{4}$";
+           boolean result = Pattern.matches(regExp, param2);
        if(result == false) {
-          errors.rejectValue("param2", "errors.form1.format", "전화번호 형식에 맞지 않음(D)");
+          errors.rejectValue("param2", "errors.form1.format", "전화번호 형식에 맞지 않음");
            }
         }
         
@@ -60,7 +60,7 @@ public class Ch04Form1Validator implements Validator{
         if(param3 == null || param3.equals("")) {
        errors.rejectValue("param3", "errors.form1.required", "필수 입력(D)");
         } else {
-           String regExp = "([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)";
+           String regExp = "^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$";
        boolean result = Pattern.matches(regExp, param3);
        if(result == false) {
           errors.rejectValue("param3", "errors.form1.format", "이메일 형식에 맞지 않음(D)");
