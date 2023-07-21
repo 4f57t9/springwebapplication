@@ -14,7 +14,7 @@
             POST 방식으로 요청
          </div>
          <div class="card-body">
-            <form id="form0" method="post" action="method1" onsubmit="checkData()">
+            <form id="form1" method="post" action="method1" onsubmit="checkData()">
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
                   <input type="text" name="param1" class="form-control" value="">
@@ -51,7 +51,7 @@
          </div>
          <script>
             function checkData() {
-            	const form = document.querySelector("#form0");
+            	const form = document.querySelector("#form1");
                //form의 제출 기능을 off
                event.preventDefault();
                
@@ -60,7 +60,7 @@
                
                //입력 길이 체크
                let param1 = form.param1.value;
-               const param1Error = document.querySelector("#form0 .param1-error");
+               const param1Error = document.querySelector("#form1 .param1-error");
                param1Error.innerHTML = "";
                if(param1 === "") {
                   param1Error.innerHTML = "필수 입력 사항";
@@ -74,7 +74,7 @@
                
                //정규 표현식을 이용한 전화번호 형식 체크
                let param2 = form.param2.value;
-               const param2Error = document.querySelector("#form0 .param2-error");
+               const param2Error = document.querySelector("#form1 .param2-error");
                param2Error.innerHTML = "";
                if(param2 === "") {
                   param2Error.innerHTML = "필수 입력 사항";
@@ -90,7 +90,7 @@
                
                //정규 표현식을 이용한 이메일 형식 체크
                let param3 = form.param3.value;
-               const param3Error = document.querySelector("#form0 .param3-error");
+               const param3Error = document.querySelector("#form1 .param3-error");
                param3Error.innerHTML = "";
                if(param3 === "") {
                   param3Error.innerHTML = "필수 입력 사항";
@@ -107,7 +107,7 @@
                //날짜가 비었는지 체크
                let param5 = form.param5.value;
                console.log(param5);
-               const param5Error = document.querySelector("#form0 .param5-error");
+               const param5Error = document.querySelector("#form1 .param5-error");
                param5Error.innerHTML = "";
                if(param5 === "") {
                   param5Error.innerHTML = "필수 입력 사항";
@@ -128,7 +128,7 @@
             AJAX로 요청
          </div>
          <div class="card-body">
-            <form id="form1" name="form1">
+            <form id="form2" name="form2">
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
                   <input type="text" id="param1" name="param1" class="form-control">
@@ -218,7 +218,7 @@
                   회원 가입 폼
                </div>
                <div class="card-body">         
-                  <form method="post" action="join">
+                  <form id="form3" method="post" action="join">
                      <div class="input-group">
                         <div class="input-group-prepend"><span class="input-group-text">mid</span></div>
                         <input type="text" name="mid" class="form-control" value="${joinForm.mid}" autocomplete="username">
@@ -249,7 +249,7 @@
                   로그인 폼
                </div>
                <div class="card-body">
-                  <form method="post" action="login">
+                  <form id="form4" method="post" action="login">
                      <div class="input-group">
                         <div class="input-group-prepend"><span class="input-group-text">mid</span></div>
                         <input type="text" name="mid" class="form-control" value="${loginForm.mid}">

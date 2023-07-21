@@ -56,6 +56,7 @@
          <div class="card-body">
             <form method="post" action="method3">
             <%-- 
+            	필수 값인데 주석처리 되어 있으므로 에러 발생
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
                   <input type="text" name="param1" class="form-control" value="문자열">
