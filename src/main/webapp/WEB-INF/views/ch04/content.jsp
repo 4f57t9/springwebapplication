@@ -100,7 +100,7 @@
                      checkResult = false;
                   }
                }
-               
+                
                //정규 표현식을 이용한 이메일 형식 체크
                let param3 = form.param3.value;
                const param3Error = document.querySelector("#form1 .param3-error");
