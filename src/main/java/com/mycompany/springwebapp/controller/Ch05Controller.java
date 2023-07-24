@@ -34,23 +34,23 @@ public class Ch05Controller {
 	}
 	
 	// 쿠키 생성
-	// 다시 브라우저에서 사용하기 위해
+	// 단순한 정보를 저장했다가 서버가 사용하기 위해 생성
 	@RequestMapping(value="/createCookie", method=RequestMethod.GET)
 	public String createCookie(HttpServletResponse response) {
 		log.info("실행");
 		
 		Cookie cookie = new Cookie("usermail", "summer@mycompany.com");
-		cookie.setDomain("localhost");
-		cookie.setPath("/");
-		cookie.setMaxAge(30*60);
-		cookie.setHttpOnly(true);
-		cookie.setSecure(false);
-		response.addCookie(cookie);
+		cookie.setDomain("com.mycompany");	// 쿠키를 재전송할 서버를 지정
+		cookie.setPath("/");				// 쿠키를 재전송할 경로를 지정
+		cookie.setMaxAge(30*60);			// 쿠키의 저장 기간(단위 초), 시간을 지정안할 경우: 브라우저 메모리 저장
+		cookie.setHttpOnly(false);			// true : 서버만 이용, false : JavaScirpt에서 접근 허용
+		cookie.setSecure(false);			// false : http, https 모두 쿠키를 사용, true : https만 사용
+		response.addCookie(cookie);			// 응답에 쿠키 설정
 		
 		return "redirect:/ch05/content";
 	}
 	
-	// 쿠기 얻기
+	// 쿠키 얻기
 	@RequestMapping(value="/getCookie", method=RequestMethod.GET)
 	public String getCookie(@CookieValue("usermail") String userEmail) {
 		log.info("실행");
