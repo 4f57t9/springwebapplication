@@ -28,4 +28,11 @@
          <a class="text-white" href="${pageContext.request.contextPath}/ch04/content">요청 데이터의 유효성 검사</a>
       </h6>
    </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch05.</span>
+         <a class="text-white" href="${pageContext.request.contextPath}/ch05/content">요청 헤더 얻기 및 쿠키 사용</a>
+      </h6>
+   </li>
 </ul>
