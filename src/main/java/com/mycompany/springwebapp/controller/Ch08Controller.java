@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.mycompany.springwebapp.dto.Ch08Item;
 import com.mycompany.springwebapp.dto.Ch08Member;
+import com.mycompany.springwebapp.interceptor.Login;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,12 +39,14 @@ public class Ch08Controller {
 	}
 	
 	@GetMapping("/logout")
+	@Login
 	public String logout(HttpSession session) {
 		session.removeAttribute("login");
 		return "redirect:/ch08/content";
 	}
 	
 	@PostMapping("/addCart")
+	@Login
 	public String addCart(
 			Ch08Item item, 
 			HttpSession session,
@@ -76,6 +79,7 @@ public class Ch08Controller {
 	}
 	
 	@GetMapping("/clearCart")
+	@Login
 	public String clearCart(HttpSession session) {
 		// 카트를 삭제
 		

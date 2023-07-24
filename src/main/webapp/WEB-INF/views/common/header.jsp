@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,12 +23,13 @@
             </a>
             <div>
                <div>
-                  <c:if test="${loginId == null}">
-                     <a href="${pageContext.request.contextPath}/exam07/SaveSessionController" class="btn btn-success btn-sm">로그인</a>
+                  <c:if test="${login == null}">
+                     <a href="${pageContext.request.contextPath}/ch08/content" class="btn btn-success btn-sm">로그인</a>
                   </c:if>
-                  <c:if test="${loginId != null}">
-                     <span class="mr-2">${loginId}</span>
-                     <a href="${pageContext.request.contextPath}/exam07/RemoveSessionController" class="btn btn-success btn-sm">로그아웃</a>
+                  <c:if test="${login != null}">
+                     <img src="${pageContext.request.contextPath}/resources/face/${login.mid}.png" width="30" height="30" />
+                     ${login.mid}
+                     <a href="logout" class="btn btn-success btn-sm">로그아웃</a>
                   </c:if>
                </div>
             </div>
