@@ -67,7 +67,7 @@
    <li class="nav-item mb-2">
       <h6 class="text-white">
          <span class="mr-2">Ch10.</span>
-         <a class="text-white" href="${pageContext.request.contextPath}/ch10/content"></a>
+         <a class="text-white" href="${pageContext.request.contextPath}/ch10/content">예외 처리</a>
       </h6>
    </li>
 </ul>
