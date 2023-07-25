@@ -56,4 +56,18 @@
          <a class="text-white" href="${pageContext.request.contextPath}/ch08/content">세션 이용</a>
       </h6>
    </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch09.</span>
+         <a class="text-white" href="${pageContext.request.contextPath}/ch09/content">파일 업로드와 다운로드</a>
+      </h6>
+   </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch10.</span>
+         <a class="text-white" href="${pageContext.request.contextPath}/ch10/content"></a>
+      </h6>
+   </li>
 </ul>

@@ -26,6 +26,17 @@
   	</init-param>
   	<!-- 웹앱 실행 시, 서블릿 객체 생성-->
   	<load-on-startup>1</load-on-startup>
+  	<!-- 멀티파트 파싱을 위한 설정 -->
+  	<multipart-config>
+  		<!-- 임시 파일이 저장될 디렉토리 -->
+  		<location>C:/Temp</location>
+  		<!-- 요청 바디에 포함된 파일 하나당의 크기를 제한: 20M(1024 * 1024 * 20) -->
+  		<max-file-size>20971520</max-file-size>
+  		<!-- 전체 요청 바디의 사이즈를 제한: 100M(1024 * 1024 * 100) -->
+  		<max-request-size>104857600</max-request-size>
+  		<!-- 임시 파일로 저장하는 크기의 기준 1M(1024 * 1024) -->
+  		<file-size-threshold>1048576</file-size-threshold>
+  	</multipart-config>
   </servlet>
   <servlet-mapping>
   	<servlet-name>DispatcherServlet</servlet-name>
