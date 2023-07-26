@@ -44,5 +44,4 @@ public class Ch10ExceptionHandler {
     public String handle404() {
        return "ch10/404";
     }
-	
 }

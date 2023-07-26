@@ -51,5 +51,10 @@ public class Ch11Controller {
 		return "redirect:/ch11/content";
 	}
 	
+	@PostMapping("/form2")
+	public String form2(@ModelAttribute("member") Ch11Member member) {
+		
+		return "redirect:/ch11/form2";
+	}
 	
 }
