@@ -77,4 +77,11 @@
          <a class="text-white" href="${pageContext.request.contextPath}/ch11/content">스프링 태그 라이브러리</a>
       </h6>
    </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch12.</span>
+         <a class="text-white" href="${pageContext.request.contextPath}/ch12/content">객체 생성(싱글톤) 및 의존 주입</a>
+      </h6>
+   </li>
 </ul>

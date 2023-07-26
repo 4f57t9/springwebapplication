@@ -8,7 +8,11 @@
       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-      <property name="basenames" value="message.ch04_error">
+      <property name="basenames">
+      	<list>
+      		<value>message.ch04_error</value>
+      		<value>message.ch11_internationalization</value>
+      	</list>
       </property>
       <!-- message.ch04_error 에 지정된 파일 (message밑의)을 해석하고, 
       코드에서 errors.form1.param1.required 같은 (validator.java에서 가져옴) 

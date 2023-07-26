@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
@@ -30,7 +32,7 @@
 			<button class="btn btn-info btn-sm">제출</button>
 		</form:form>
 		
-		<form:form modelAttribute="member" method="post" action="form3" class="mt-3">
+		<form:form modelAttribute="member" class="mt-3">
 			<div>
 				<form:radiobuttons items="${cityList}" path="mcity" 
 								 itemValue="code" itemLabel="label"
