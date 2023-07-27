@@ -12,8 +12,14 @@
 	<!-- Connection Pool 생성 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<!-- Connection을 생성하기 위한 정보를 설정 -->
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+		<!-- 
+			<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+			<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" /> 
+		-->
+		<!-- SQL문을 로그로 출력하거나, 받은 결과를 로그로 출력하기 위한 설정 -->
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl" />
+		
 		<property name="username" value="spring" />
 		<property name="password" value="oracle" />
 		
