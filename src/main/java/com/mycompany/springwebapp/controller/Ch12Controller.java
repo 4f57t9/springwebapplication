@@ -20,6 +20,7 @@ import com.mycompany.springwebapp.dto.Ch11Skill;
 import com.mycompany.springwebapp.service.Ch12ServiceCreateByXml;
 import com.mycompany.springwebapp.service.Ch12ServiceDiByAnnotation;
 import com.mycompany.springwebapp.service.Ch12ServiceDiByXml;
+import com.mycompany.springwebapp.service.Ch12ServicePropertyDi;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,10 +34,14 @@ public class Ch12Controller {
 	@Autowired
 	private Ch12ServiceDiByAnnotation serviceDiByAnnotation;
 	
+	@Autowired
+	private Ch12ServicePropertyDi servicePropertyDi;
+	
 	@RequestMapping("/content")
 	public String content(HttpSession session) {
 		serviceDiByXml.method();
 		serviceDiByAnnotation.method();
+		servicePropertyDi.method();
 		return "ch12/content";
 	}
 }
