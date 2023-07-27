@@ -18,6 +18,7 @@ import com.mycompany.springwebapp.dto.Ch11City;
 import com.mycompany.springwebapp.dto.Ch11Member;
 import com.mycompany.springwebapp.dto.Ch11Skill;
 import com.mycompany.springwebapp.service.Ch12ServiceCreateByXml;
+import com.mycompany.springwebapp.service.Ch12ServiceDiByAnnotation;
 import com.mycompany.springwebapp.service.Ch12ServiceDiByXml;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +30,13 @@ public class Ch12Controller {
 	@Autowired
 	private Ch12ServiceDiByXml serviceDiByXml;
 	
+	@Autowired
+	private Ch12ServiceDiByAnnotation serviceDiByAnnotation;
+	
 	@RequestMapping("/content")
 	public String content(HttpSession session) {
 		serviceDiByXml.method();
+		serviceDiByAnnotation.method();
 		return "ch12/content";
 	}
-	
-	
-
 }
