@@ -23,3 +23,4 @@
 		delete from board where bno=#{bno} <!-- 한 값만 들어오기 때문에 #{dasd}도 상관없다 -->
 	</delete>
 </mapper>
+

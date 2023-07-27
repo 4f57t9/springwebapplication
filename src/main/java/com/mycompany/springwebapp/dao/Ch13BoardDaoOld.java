@@ -16,6 +16,7 @@ public class Ch13BoardDaoOld {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
+	// board.xml 의 namespace(해당xml파일을 얻기 위함)
 	public void insert(Ch13Board board) {
 		sst.insert("com.mycompany.springwebapp.dao.mybatis.Ch13BoardDao.insert", board);
 	}
