@@ -24,33 +24,33 @@ public class Ch13BoardDaoOldImpl implements Ch13BoardDaoOld {
 			.insert : Mapper XML 안의 선언된 ID
 			리턴값 : 실제 테이블의 반영된 행의 수
 		*/
-		int rows = sst.insert("com.mycompany.springwebapp.dao.Ch13BoardDao.insert", board);
+		int rows = sst.insert("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.insert", board);
 		return rows;
 	}
 	
 	public List<Ch13Board> selectAll(Ch13Pager pager) {
-		List<Ch13Board> list =  sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDao.selectAll");
+		List<Ch13Board> list =  sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectByPage");
 		return list;
 	}
 	
 	public Ch13Board selectByBno(int bno) {
-		Ch13Board board =  sst.selectOne("com.mycompany.springwebapp.dao.Ch13BoardDao.selectByBno", bno);
+		Ch13Board board =  sst.selectOne("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectByBno", bno);
 		return board;
 	}
 	
 	public int updateByBno(Ch13Board board) {
-		int rows = sst.update("com.mycompany.springwebapp.dao.Ch13BoardDao.updateByBno", board);
+		int rows = sst.update("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.updateByBno", board);
 		return rows;
 	}
 	
 	public int deleteByBno(int bno) {
-		int rows = sst.delete("com.mycompany.springwebapp.dao.Ch13BoardDao.deleteByBno", bno);
+		int rows = sst.delete("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.deleteByBno", bno);
 		return rows;
 	}
 	
 	@Override
 	public int count() {
-		int count = sst.selectOne("com.mycompany.springwebapp.dao.Ch13BoardDao.count");
+		int count = sst.selectOne("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.count");
 		return count;
 	}
 }
