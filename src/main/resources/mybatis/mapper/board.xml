@@ -18,9 +18,25 @@
 	</insert>
 	
 	<!-- 한 행을 resultType객체로 만든다. -->
-	<select id="selectAll" resultType="Board">
-		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
-		from board
+	<select id="selectAll" parameterType="Pager" resultType="Board">
+		<![CDATA[
+			select rnum, bno, btitle, mid, bdate, bhitcount, battachoname
+	        from (
+	           select rownum as rnum, bno, btitle, mid, bdate, bhitcount, battachoname
+	           from (
+	              select bno, btitle, mid, bdate, bhitcount, battachoname
+	              from board
+	              order by bno desc
+	           )
+	           where rownum <=#{endRowNo}
+	           
+	        )
+	        where rnum >=#{startRowNo}
+        ]]>
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from board
 	</select>
 	
 	<select id="selectByBno" parameterType="int" resultType="Board">

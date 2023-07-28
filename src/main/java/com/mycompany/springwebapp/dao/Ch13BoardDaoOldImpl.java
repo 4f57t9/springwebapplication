@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mycompany.springwebapp.dto.Ch13Board;
+import com.mycompany.springwebapp.dto.Ch13Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +28,7 @@ public class Ch13BoardDaoOldImpl implements Ch13BoardDaoOld {
 		return rows;
 	}
 	
-	public List<Ch13Board> selectAll() {
+	public List<Ch13Board> selectAll(Ch13Pager pager) {
 		List<Ch13Board> list =  sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDao.selectAll");
 		return list;
 	}
@@ -45,5 +46,11 @@ public class Ch13BoardDaoOldImpl implements Ch13BoardDaoOld {
 	public int deleteByBno(int bno) {
 		int rows = sst.delete("com.mycompany.springwebapp.dao.Ch13BoardDao.deleteByBno", bno);
 		return rows;
+	}
+	
+	@Override
+	public int count() {
+		int count = sst.selectOne("com.mycompany.springwebapp.dao.Ch13BoardDao.count");
+		return count;
 	}
 }

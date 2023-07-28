@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.springwebapp.dao.Ch13BoardDao;
 import com.mycompany.springwebapp.dao.Ch13BoardDaoOld;
-import com.mycompany.springwebapp.dao.Ch13BoardDaoOldImpl;
 import com.mycompany.springwebapp.dto.Ch13Board;
+import com.mycompany.springwebapp.dto.Ch13Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,23 +36,29 @@ public class Ch13Controller {
 		log.info("실행");
 		
 		Ch13Board board = new Ch13Board();
-		board.setBtitle("아");
-		board.setBcontent("피곤하다");
+		board.setBtitle("제목");
+		board.setBcontent("내용");
 		board.setMid("user");
 		
 		// boardDaoOld.insert(board);
 		boardDao.insert(board);
 		
-		// 실제로 저장된bno : 
-		log.info("");
+		// 실제로 저장된bno
+		log.info("저장된 bno: " + board.getBno());
 		return "redirect:/ch13/content";
 	}
 	
 	@GetMapping("/getBoardList")
 	public String getBoardList() {
-		// List<Ch13Board> list = boardDaoOld.selectAll();
-		List<Ch13Board> list = boardDao.selectAll();
-		log.info(list.toString());
+		int totalRows = boardDao.count();
+		Ch13Pager pager = new Ch13Pager(10, 5, totalRows, 1);
+		
+		// List<Ch13Board> list = boardDaoOld.selectAll(pager);
+		List<Ch13Board> list = boardDao.selectAll(pager);
+		for(Ch13Board board : list) {
+			log.info(board.toString());			
+		}
+		
 		return "redirect:/ch13/content";
 	}
 	
