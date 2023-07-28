@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mycompany.springwebapp.dao.mybatis.Ch13BoardDao">
+<mapper namespace="com.mycompany.springwebapp.dao.Ch13BoardDao">
 	<!-- 실행할 때 parameterType객체를 받겠다는 설정 -->
-	<insert id="insert" parameterType="com.mycompany.springwebapp.dto.Ch13Board">
+	<insert id="insert" parameterType="Board">
+		<!-- 
+			가져온 값을 Board의 bno필드에 저장하라는 의미 
+			resultType : 받아오는 값의 type은 int
+			order : 먼저 실행
+		-->
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE"> 
+			select seq_bno.nextval from dual
+		</selectKey>
+		
 		<!-- SQL문 제공 -->
 		insert into board (bno, btitle, bcontent, mid, bdate, bhitcount)
-		values(seq_bno.nextval, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
+		values(#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
 	</insert>
 	
 	<!-- 한 행을 resultType객체로 만든다. -->
-	<select id="selectAll" resultType="com.mycompany.springwebapp.dto.Ch13Board">
+	<select id="selectAll" resultType="Board">
 		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
 		from board
 	</select>
 	
-	<update id="updateByBno" parameterType="com.mycompany.springwebapp.dto.Ch13Board">
+	<select id="selectByBno" parameterType="int" resultType="Board">
+		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
+		from board
+		where bno=#{bno}
+	</select>
+	
+	<update id="updateByBno" parameterType="Board">
 		update board set btitle=#{btitle}, bcontent=#{bcontent}
 		where bno=#{bno}
 	</update>
