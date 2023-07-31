@@ -26,7 +26,7 @@
 	<!-- 
 		MyBatis의 DAO구현 객체를 생성하기 위한 인터페이스의 위치를 설정 
 		annotation="org.apache.ibatis.annotations.Mapper" : 
-			@Mapper가 분어있는 인터페이스만 매퍼로 등록 (매퍼 XML과 연동)하고,
+			@Mapper가 붙어있는 인터페이스만 매퍼로 등록 (매퍼 XML과 연동)하고,
 				구현 객체를 자동으로 생성해서 스프링 관리 빈으로 생성
 			생략되면 base-package 에 있는 모든 하위 인터페이스를 메퍼로 등록(매퍼 XML과 연동)하고,
 				구현 객체를 자동으로 생성해서 스프링 관리 빈으로 생성

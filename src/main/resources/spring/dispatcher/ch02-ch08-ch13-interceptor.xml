@@ -10,11 +10,19 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/ch02/**"/>
+			<mvc:exclude-mapping path="/resources/**"/>
 			<bean class="com.mycompany.springwebapp.interceptor.Ch02InterceptorA"/>
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
+			<mvc:mapping path="/ch02/**"/>
+			<mvc:exclude-mapping path="/resources/**"/>
+			<bean class="com.mycompany.springwebapp.interceptor.Ch02InterceptorB"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
 			<mvc:mapping path="/ch08/**"/>
+			<mvc:exclude-mapping path="/resources/**"/>
 			<!-- 
 			방법 2
 			인터셉터가 관여하면안되기 때문에 resources를 제외시야 줘야한다.
@@ -22,6 +30,12 @@
 			<mvc:exclude-mapping path="/resources/**" /> 
 			-->
 			<bean class="com.mycompany.springwebapp.interceptor.Ch08LoginCheckInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/ch13/**"/>
+			<mvc:exclude-mapping path="/resources/**"/>
+			<bean class="com.mycompany.springwebapp.interceptor.Ch13LoginCheckInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

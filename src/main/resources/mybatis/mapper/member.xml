@@ -3,7 +3,7 @@
 <mapper namespace="com.mycompany.springwebapp.dao.Ch13MemberDao">
 	<insert id="insert" parameterType="Member">
 		insert into member (mid, mname, mpassword, menabled, mrole, memail)
-		values(#{mid}, #{mname}, #{mpassword}, 1, 'ROLE_USER', #{menail})
+		values(#{mid}, #{mname}, #{mpassword}, 1, 'ROLE_USER', #{memail})
 	</insert>
 	
 	<select id="selectByMid" parameterType="String"  resultType="Member">
@@ -13,7 +13,7 @@
 	</select>
 	
 	<update id="update" parameterType="Member">
-		update member set mpassword=#{mpassword}, memail=#{meamil}
+		update member set mpassword=#{mpassword}, memail=#{memail}
 		where mid = #{mid}
 	</update>
 </mapper>

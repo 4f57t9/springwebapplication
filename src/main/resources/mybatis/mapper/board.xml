@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  -->
 <mapper namespace="com.mycompany.springwebapp.dao.Ch13BoardDao">
 	<!-- 실행할 때 parameterType객체를 받겠다는 설정 -->
 	<insert id="insert" parameterType="Board">
 		<!-- 
 			가져온 값을 Board의 bno필드에 저장하라는 의미 
 			resultType : 받아오는 값의 type은 int
-			order : 먼저 실행
+			order : SQL문이 실행되기 전에 먼저 실행
 		-->
 		<selectKey keyProperty="bno" resultType="int" order="BEFORE"> 
 			select seq_bno.nextval from dual
 		</selectKey>
 		
-		<!-- SQL문 제공 -->
-		insert into board (bno, btitle, bcontent, mid, bdate, bhitcount)
-		values(#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
+		<!-- null이 들어갈 컬럼값은 반드시 jdbcType을 명시해야함 -->
+		insert into board (
+				bno, btitle, bcontent, mid, bdate, bhitcount, 
+				battachoname, battachtype, battachsname, battachdata
+		) values(
+				#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0, 
+				#{battachoname, jdbcType=VARCHAR},
+				#{battachtype, jdbcType=VARCHAR},
+				#{battachsname, jdbcType=VARCHAR},
+				#{battachdata, jdbcType=BLOB}
+		)
 	</insert>
 	
 	<!-- 한 행을 resultType객체로 만든다. -->
-	<select id="selectAll" parameterType="Pager" resultType="Board">
+	<select id="selectByPage" parameterType="Pager" resultType="Board">
 		<![CDATA[
 			select rnum, bno, btitle, mid, bdate, bhitcount, battachoname
 	        from (

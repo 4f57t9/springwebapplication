@@ -28,8 +28,13 @@ public class Ch13BoardDaoOldImpl implements Ch13BoardDaoOld {
 		return rows;
 	}
 	
-	public List<Ch13Board> selectAll(Ch13Pager pager) {
-		List<Ch13Board> list =  sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectByPage");
+	public List<Ch13Board> selectByPage(Ch13Pager pager) {
+		List<Ch13Board> list =  sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectByPage", pager);
+		return list;
+	}
+	
+	public List<Ch13Board> selectAll() {
+		List<Ch13Board> list =  sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectAll");
 		return list;
 	}
 	

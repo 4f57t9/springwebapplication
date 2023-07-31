@@ -1,6 +1,5 @@
 package com.mycompany.springwebapp.dto;
 
-import java.sql.Blob;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,9 +16,14 @@ public class Ch13Board {
 	private Date bdate;
 	private String mid;
 	private int bhitcount;
-	private String battachoname;
-	private String battachsname;
-	private String battachtype;
-	private Blob battacjdata;
+	// Client -> Controller
 	private MultipartFile battach;
+	// Controller -> Service -> Dao -> DB
+	private String battachoname;
+	private String battachtype;
+	// 방법1: 서버 파일 시스템에 파일로 저장
+	private String battachsname;
+	// 방법2: DB에 BLOB으로 저장
+	// byte[] <- MyBatis -> BLOB
+	private byte[] battachdata;
 }
