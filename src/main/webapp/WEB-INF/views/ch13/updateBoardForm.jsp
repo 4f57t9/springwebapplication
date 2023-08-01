@@ -7,8 +7,8 @@
 		글 수정
 	</div>
 	<div class="card-body">
-		<form id="boardUpdateForm" method="post" action="boardUpdate">
-			<input type="hidden" name="bno" value="${board.bno}"/>
+		<form id="updateBoardForm" method="post" action="updateBoard">
+			<input type="hidden" name="bno" value="${board.bno}"/> <!-- 디폴트값은 value로 넣는다 -->
 			<div class="input-group">
 				<div class="input-group-prepend"><span class="input-group-text">btitle</span></div>
 				<input id="btitle" type="text" name="btitle" class="form-control" value="${board.btitle}">

@@ -36,8 +36,7 @@ public class Ch13BoardServiceImpl implements Ch13BoardService{
 
    @Override
    public void modify(Ch13Board board) {
-	   Ch13Board dbBoard = boardDao.selectByBno(board.getBno());
-       boardDao.updateByBno(dbBoard);
+       boardDao.updateByBno(board);
    }
 
    @Override

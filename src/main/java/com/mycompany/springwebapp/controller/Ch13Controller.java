@@ -56,10 +56,74 @@ public class Ch13Controller {
 		return "ch13/content";
 	}
 	
+	@GetMapping("/join")
+	public String joinForm() {
+		return "ch13/joinForm";
+	}
+	
+	@PostMapping("/join")
+	public String join(Ch13Member member, Model model) {
+		JoinResult result = memberService.join(member);
+		if(result == JoinResult.FAIL_DUPLICATED_MID) {
+			String error = "중복된 MID가 존재합니다.";
+			model.addAttribute("error", error);
+			return "ch13/joinForm";
+		} else {
+			memberService.join(member);
+			return "redirect:/ch13/content";
+		}
+	}
+	
+	@GetMapping("/login")
+	public String loginForm() {
+		return "ch13/loginForm";
+	}
+	
+	@PostMapping("/login")
+	public String login(Ch13Member member, Model model, HttpSession session) {
+		LoginResult result = memberService.login(member);
+		String error = "";
+		if(result == LoginResult.FAIL_MID) {
+			error = "MID가 없습니다.";
+		} else if(result == LoginResult.FAIL_ENABLED) {
+			error = "MID가 비활성화 되어 있습니다.";
+		} else if(result == LoginResult.FAIL_MPASSWORD) {
+			error = "MPASSWORD가 틀립니다.";
+		} else {
+			Ch13Member dbMember = memberService.getMember(member.getMid());
+			session.setAttribute("ch13Login", dbMember);
+			return "redirect:/ch13/content";
+		}
+		
+		// "error"이름으로 error저장
+		model.addAttribute("error", error);
+		return "ch13/loginForm";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("ch13Login");
+		return "redirect:/ch13/content";
+	}
+	
 	@GetMapping("/getBoardList")
-	public String getBoardList(@RequestParam(defaultValue="1") int pageNo, Model model) {
+	public String getBoardList(String pageNo, Model model, HttpSession session) {
+		// 브라우저에서 pageNo가 넘어오지 않았을 경우 
+		if(pageNo == null) {
+			// 세션에 저장되어 있는지 확인
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				// 저장되어 있지 않다면 1로 초기화
+				pageNo = "1";
+			}
+		}
+		// 문자열로 정수를 변환
+		int intpageNo = Integer.parseInt(pageNo);
+		// 세션에 pageNo를 저장
+		session.setAttribute("pageNo", String.valueOf(pageNo));
+		
 		int totalBoardNum = boardService.getTotalBoardNum();
-		Ch13Pager pager = new Ch13Pager(10, 5, totalBoardNum, pageNo);
+		Ch13Pager pager = new Ch13Pager(10, 5, totalBoardNum, intpageNo);
 		
 		List<Ch13Board> list = boardService.getList(pager);
 		
@@ -182,69 +246,31 @@ public class Ch13Controller {
 	}
 	
 	@GetMapping("/updateBoard")
-	public String updateBoard(int bno, Model model) {
+	public String updateBoardForm(int bno, Model model, HttpSession session) {
 		// 기존 보드 내용 가져오기
 		Ch13Board board = boardService.getBoard(bno);
-		// "board"라는 이름으로 board객체 저장
+		
+		Ch13Member member = (Ch13Member) session.getAttribute("ch13Login");
+		if(!member.getMid().equals(board.getMid())) {
+			return "redirect:/ch13/getBoardList";
+		}
+		
 		model.addAttribute("board", board);
 		return "ch13/updateBoardForm";
 	}
 	
+	@PostMapping("/updateBoard")
+	@Login
+	public String updateBoard(Ch13Board board, Model model) {
+		boardService.modify(board);
+		return "redirect:/ch13/getBoardList";
+	}
+	
 	@GetMapping("/deleteBoard")
-	public String deleteBoard() {
-		int bno = 10001;
+	@Login
+	public String deleteBoard(int bno) {
 		boardService.remove(bno);
-		return "redirect:/ch13/content";
-	}
-	
-	@GetMapping("/join")
-	public String joinForm() {
-		return "ch13/joinForm";
-	}
-	
-	@PostMapping("/join")
-	public String join(Ch13Member member, Model model) {
-		JoinResult result = memberService.join(member);
-		if(result == JoinResult.FAIL_DUPLICATED_MID) {
-			String error = "중복된 MID가 존재합니다.";
-			model.addAttribute("error", error);
-			return "ch13/joinForm";
-		} else {
-			memberService.join(member);
-			return "redirect:/ch13/content";
-		}
-	}
-	
-	@GetMapping("/login")
-	public String loginForm() {
-		return "ch13/loginForm";
-	}
-	
-	@PostMapping("/login")
-	public String login(Ch13Member member, Model model, HttpSession session) {
-		LoginResult result = memberService.login(member);
-		String error = "";
-		if(result == LoginResult.FAIL_MID) {
-			error = "MID가 없습니다.";
-		} else if(result == LoginResult.FAIL_ENABLED) {
-			error = "MID가 비활성화 되어 있습니다.";
-		} else if(result == LoginResult.FAIL_MPASSWORD) {
-			error = "MPASSWORD가 틀립니다.";
-		} else {
-			Ch13Member dbMember = memberService.getMember(member.getMid());
-			session.setAttribute("ch13Login", dbMember);
-			return "redirect:/ch13/content";
-		}
-		
-		// "error"이름으로 error저장
-		model.addAttribute("error", error);
-		return "ch13/loginForm";
-	}
-	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("ch13Login");
-		return "redirect:/ch13/content";
+		return "redirect:/ch13/getBoardList";
 	}
 	
 }
