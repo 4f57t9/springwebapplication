@@ -26,7 +26,7 @@
 			</div>
 			<div class="card-body">
 				<p><a href="runtimeCheck" class="btn btn-info btn-sm">요청 처리 시간 측정</a></p>
-				<div>${methodName} 실행시간: ${howLong}</div>
+				<div>실행시간: ${methodName} - ${runTime}ns</div>
 			</div>
 		</div>
 		
@@ -35,22 +35,8 @@
 				AOP 예제2
 			</div>
 			<div class="card-body">
-				<p><a href="javascript:boardList()" class="btn btn-info btn-sm">인증 여부 확인 후, 게시물 목록 보여주기</a></p>
-				<div id="boardList"></div>
+				<p><a href="loginCheck" class="btn btn-info btn-sm">인증 여부 확인</a></p>
 			</div>
-			<script>
-				function boardList() {
-					$.ajax({
-						url: "boardList"
-					}).done((data) => {
-						if(data.result === "fail") {
-							window.location.href = "${pageContext.request.contextPath}/ch14/login";		
-						} else {
-							$("#boardList").html(data);
-						}
-					});
-				}
-			</script>
 		</div>		
 	</div>
 </div>

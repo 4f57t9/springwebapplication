@@ -98,4 +98,11 @@
          <a class="text-white" href="${pageContext.request.contextPath}/ch14/content">AOP(관점 지향 프로그래밍)</a>
       </h6>
    </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch15.</span>
+         <a class="text-white" href="${pageContext.request.contextPath}/ch15/content">트랜잭션 처리</a>
+      </h6>
+   </li>
 </ul>

@@ -7,5 +7,6 @@
 	  <typeAlias alias="Board" type="com.mycompany.springwebapp.dto.Ch13Board"/>
 	  <typeAlias alias="Pager" type="com.mycompany.springwebapp.dto.Ch13Pager"/>
 	  <typeAlias alias="Member" type="com.mycompany.springwebapp.dto.Ch13Member"/>
+	  <typeAlias alias="Account" type="com.mycompany.springwebapp.dto.Ch15Account"/>
 	</typeAliases>
 </configuration>

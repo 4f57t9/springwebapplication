@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mycompany.springwebapp.dao.Ch13AccountDao">
-	
+<mapper namespace="com.mycompany.springwebapp.dao.Ch15AccountDao">
+	<select id="selectAll" resultType="Account">
+		SELECT ano, owner, balance FROM account
+	</select>
+	 
+	<select id="selectByAno" parameterType="int" resultType="Account">
+		SELECT ano, owner, balance FROM account WHERE ano=#{ano}
+	</select>
+	 
+	<update id="updateBalance" parameterType="Account">
+		UPDATE account SET balance=#{balance} WHERE ano=#{ano}
+	</update>
 </mapper>
