@@ -182,13 +182,12 @@ public class Ch13Controller {
 	}
 	
 	@GetMapping("/updateBoard")
-	public String updateBoard() {
-		Ch13Board board = boardService.getBoard(10001);
-		board.setBtitle("ㄹㅇ");
-		board.setBcontent("ㅋㅋ");
-		
-		boardService.modify(board);
-		return "redirect:/ch13/content";
+	public String updateBoard(int bno, Model model) {
+		// 기존 보드 내용 가져오기
+		Ch13Board board = boardService.getBoard(bno);
+		// "board"라는 이름으로 board객체 저장
+		model.addAttribute("board", board);
+		return "ch13/updateBoardForm";
 	}
 	
 	@GetMapping("/deleteBoard")

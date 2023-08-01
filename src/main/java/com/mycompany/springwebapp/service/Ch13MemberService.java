@@ -22,3 +22,4 @@ public interface Ch13MemberService {
    public void logout(String mid);
    public Ch13Member getMember(String mid);
 }
+
