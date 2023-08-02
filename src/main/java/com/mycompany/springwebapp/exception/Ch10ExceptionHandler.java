@@ -1,5 +1,7 @@
 package com.mycompany.springwebapp.exception;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -10,7 +12,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
-//@Component
+@Component
 @ControllerAdvice
 @Slf4j
 public class Ch10ExceptionHandler {
@@ -43,5 +45,11 @@ public class Ch10ExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handle404() {
        return "ch10/404";
+    }
+    
+    @ExceptionHandler(Ch15NotFoundAccountException.class)
+    public String handleNotFoundAccountException(Ch15NotFoundAccountException e, HttpSession session) {
+    	session.setAttribute("transferError", e.getMessage());
+       return "redirect:/ch15/content";
     }
 }

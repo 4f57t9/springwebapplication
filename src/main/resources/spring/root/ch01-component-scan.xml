@@ -9,6 +9,7 @@
 
 	<!-- 
 	use-default-filters="true" : 모든 @어노테이션을 찾아서 객체를 생성한다.
+	Service, Repository 는 컨트롤러에 요청이 가기전 객체가 있어야 함으로 root에서 먼저 객체를 만들어준다.
 	 -->
 	<context:component-scan base-package="com.mycompany.springwebapp" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>

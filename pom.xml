@@ -161,7 +161,7 @@
 		Ch13
 		JDBC로 실행하는 SQL문을 로그로 출력해주는 라이브러리
 	 -->
-	<dependency>
+	<dependency> 	
 	    <groupId>com.googlecode.log4jdbc</groupId>
 	    <artifactId>log4jdbc</artifactId>
 	    <version>1.2</version>
